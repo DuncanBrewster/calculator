@@ -102,27 +102,81 @@ numberButtons.forEach(button => {
     button.addEventListener('click', () => {
     calculator.appendNumber(button.innerText)
     calculator.updateDisplay()
-    })
-})
+    });
+});
 
 operationButtons.forEach(button => {
     button.addEventListener('click', () => {
     calculator.chooseOperation(button.innerText)
     calculator.updateDisplay()
-    })
-})
+    });
+});
 
 equalsButton.addEventListener('click', button => {
     calculator.compute()
     calculator.updateDisplay()
-})
+});
 
 allClearButton.addEventListener('click', button => {
     calculator.clear()
     calculator.updateDisplay()
-})
+});
 
 deleteButton.addEventListener('click', button => {
     calculator.delete()
     calculator.updateDisplay()
-})
+});
+
+window.addEventListener('keydown', (e) => {
+    if(
+        e.key === '0' ||
+        e.key === '1' ||
+        e.key === '2' ||
+        e.key === '3' ||
+        e.key === '4' ||
+        e.key === '5' ||
+        e.key === '6' ||
+        e.key === '7' ||
+        e.key === '8' ||
+        e.key === '9' ||
+        e.key === '.' 
+    ) {
+        clickButtonElement(e.key);
+    } else if (
+        e.key === "*" ||
+        e.key === "+" ||
+        e.key === "-" 
+    ) {
+        clickOperationElement(e.key);
+    } else if (e.key === "/"){
+        clickOperationElement("÷")
+    } else if (e.key == "Enter" || e.key === "=") {
+        clickEqual();
+    } else if (e.key == "Backspace") {
+        clickDelete();
+    }
+});
+
+function clickButtonElement(key) {
+    numberButtons.forEach( button => {
+        if (button.innerText === key) {
+            button.click();
+        }
+    });
+};
+
+function clickOperationElement(key) {
+    operationButtons.forEach( button => {
+        if(button.innerText === key) {
+            button.click();
+        }
+    });
+};
+
+function clickEqual() {
+    equalsButton.click();
+}
+
+function clickDelete() {
+    deleteButton.click();
+}
